@@ -10,17 +10,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 const tabs = [
   {
     key: "/gotcha",
-    title: "ホーム",
+    title: "Gotcha",
     icon: <EnvironmentOutlined />,
   },
   {
     key: "/find",
-    title: "最初",
+    title: "探す",
     icon: <AimOutlined />,
   },
   {
-    key: "/mypage",
-    title: "マイページ",
+    key: "/wallet",
+    title: "ウォレット",
     icon: <UserOutlined />,
   },
 ];

@@ -8,8 +8,9 @@ import {
   EXPLORER_URL,
   RPC_URL,
 } from "./constants";
+import { accountVar } from "./web3";
 
-const contractVar = makeVar<Contract | null>(null);
+export const contractVar = makeVar<Contract | null>(null);
 
 export const initContract = async () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -52,8 +53,13 @@ export async function onWalletConnect() {
     });
   }
   await initContract();
-  updateTokenBalance();
 }
+
+export const updateTokenBalance = async () => {
+  const contract = contractVar()!;
+  const account = accountVar()!;
+  return await contract.balanceOf(account);
+};
 
 async function changeNetwork() {
   await window.ethereum.request({
