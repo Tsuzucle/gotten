@@ -42,7 +42,7 @@ const Gotcha = () => {
   }, [contract]);
 
   const handleClickGoExplore = useCallback(() => {
-    (window as any).location = exploreUrl;
+    window.location.href = exploreUrl;
   }, [exploreUrl]);
 
   return (

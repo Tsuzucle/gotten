@@ -15,12 +15,7 @@ const Find = () => {
     });
   }, []);
 
-  console.log({ treasures });
-  return (
-    <>
-      <Map treasures={treasures} />
-    </>
-  );
+  return <Map treasures={treasures} />;
 };
 
 export default Find;
