@@ -8,14 +8,12 @@ import {
   EXPLORER_URL,
   RPC_URL,
 } from "./constants";
-import { accountVar, openMetaMaskApp } from "./web3";
+import { accountVar } from "./web3";
 
 export const contractVar = makeVar<Contract | null>(null);
 
 export const initContract = async () => {
   if (!window.ethereum) {
-    openMetaMaskApp();
-
     return;
   }
   const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -68,21 +66,21 @@ async function changeNetwork() {
 }
 
 export const loadTreasures = async () => {
-  const contract = contractVar()!;
-  const treasureCount = (await contract.treasureCount()).toNumber();
+  const contract = contractVar();
+  const treasureCount = (await contract?.treasureCount()).toNumber();
   // console.log(treasureCount)
   const treasures = [];
   for (let i = 1; i <= treasureCount; i++) {
-    const treasure = await contract.treasures(i);
+    const treasure = await contract?.treasures(i);
     treasures.push({ ...treasure, id: i });
   }
   return treasures;
 };
 
 export const getBalance = async () => {
-  const contract = contractVar()!;
+  const contract = contractVar();
   const account = accountVar()!;
-  const balance = await contract.balanceOf(account);
+  const balance = await contract?.balanceOf(account);
   return ethers.utils.formatEther(balance);
 };
 

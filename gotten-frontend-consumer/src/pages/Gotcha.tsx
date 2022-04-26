@@ -7,12 +7,14 @@ import Column from "../components/Column";
 import { Button } from "antd-mobile";
 import { Result, Typography } from "antd";
 import { css } from "@emotion/css";
+import { accountVar, openMetaMaskApp } from "../web3";
 
 const { Text } = Typography;
 
 const exploreBaseUrl = "https://polygonscan.com/tx/";
 
 const Gotcha = () => {
+  const account = useReactiveVar(accountVar);
   const contract = useReactiveVar(contractVar);
   const navigate = useNavigate();
   const location = useLocation();
@@ -45,9 +47,15 @@ const Gotcha = () => {
     window.location.href = exploreUrl;
   }, [exploreUrl]);
 
+  const handleClickMetaMask = useCallback(() => {
+    openMetaMaskApp();
+  }, []);
+
   return (
     <Column className={styles.root}>
-      {exploreUrl ? (
+      {!account ? (
+        <Button onClick={handleClickMetaMask}>Go To Metamask</Button>
+      ) : exploreUrl ? (
         <Result
           status="success"
           title="Successfully Gotcha"

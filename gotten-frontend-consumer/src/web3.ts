@@ -6,7 +6,6 @@ const accountVar = makeVar<string | null>(null);
 const connectWeb3 = async () => {
   if (typeof ethereum === "undefined") {
     if (window.confirm("Open in the MetaMask app?")) {
-      openMetaMaskApp();
       return;
     }
   }
