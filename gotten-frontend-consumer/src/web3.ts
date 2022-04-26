@@ -23,7 +23,7 @@ ethereum?.on("accountsChanged", async () => {
 
 export function openMetaMaskApp() {
   const location = window.location;
-  const url = `https://metamask.app.link/dapp/${location.href}`;
+  const url = `https://metamask.app.link/dapp/${location.hostname}${location.pathname}${location.search}`;
   location.href = url;
 }
 
