@@ -1,29 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { createCustomEqual } from "fast-equals";
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
+import { Wrapper } from "@googlemaps/react-wrapper";
 import { isLatLngLiteral } from "@googlemaps/typescript-guards";
 
-const render = (status: Status) => {
-  return <h1>{status}</h1>;
+type Props = {
+  defaultLatLng: google.maps.LatLngLiteral;
+  onChange: (latLng: google.maps.LatLngLiteral) => void;
 };
 
-const App: React.FC = () => {
-  const [marker, setMarker] = useState<google.maps.LatLng | null>(null);
-  const [zoom, setZoom] = useState(8); // initial zoom
-  const [center, setCenter] = useState<google.maps.LatLngLiteral>({
-    lat: 0,
-    lng: 0,
-  });
+const App: React.FC<Props> = (props) => {
+  const { defaultLatLng, onChange } = props;
+  const [marker, setMarker] =
+    useState<google.maps.LatLngLiteral>(defaultLatLng);
+  const [zoom, setZoom] = useState(15);
+  const [center, setCenter] =
+    useState<google.maps.LatLngLiteral>(defaultLatLng);
 
   const onClick = (e: google.maps.MapMouseEvent) => {
-    setMarker(e.latLng!);
+    const newLatLng = {
+      lat: e.latLng!.lat(),
+      lng: e.latLng!.lng(),
+    };
+    onChange(newLatLng);
+    setMarker(newLatLng);
   };
 
-  const onIdle = (m: google.maps.Map) => {
-    console.log("onIdle");
+  const onIdle = useCallback((m: google.maps.Map) => {
     setZoom(m.getZoom()!);
     setCenter(m.getCenter()!.toJSON());
-  };
+  }, []);
 
   const form = (
     <div
@@ -36,17 +41,13 @@ const App: React.FC = () => {
       }}
     >
       {!marker && <h3>Click on map to add markers</h3>}
-      {marker && <pre>{JSON.stringify(marker.toJSON(), null, 2)}</pre>}
-      <button onClick={() => setMarker(null)}>Clear</button>
+      {marker && <pre>{JSON.stringify(marker, null, 2)}</pre>}
     </div>
   );
 
   return (
     <div style={{ display: "flex", height: "400px" }}>
-      <Wrapper
-        apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY!}
-        render={render}
-      >
+      <Wrapper apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY!}>
         <Map
           center={center}
           onClick={onClick}
