@@ -24,6 +24,7 @@ function MenuItem(
 }
 
 const items: MenuItemType[] = [
+  MenuItem("My Page", "/mypage", <PieChartOutlined />),
   MenuItem("Treasure", "/treasures", <PieChartOutlined />),
   MenuItem("New", "/treasures/new", <DesktopOutlined />),
 ];
@@ -35,7 +36,6 @@ function Layout() {
   return (
     <BaseLayout style={{ minHeight: "100vh" }}>
       <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
-        <div className="logo" />
         <Menu
           theme="dark"
           defaultSelectedKeys={["1"]}

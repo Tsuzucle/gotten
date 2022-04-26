@@ -4,7 +4,7 @@ import {
   ReactLocation,
   Router as BaseRouter,
 } from "@tanstack/react-location";
-import { Root } from "./pages";
+import { MyPage, Root, Treasures, TreasuresNew } from "./pages";
 
 export const location = new ReactLocation();
 
@@ -15,11 +15,15 @@ const routes: Route[] = [
     children: [
       {
         path: "/mypage",
-        element: <div>mypage</div>,
+        element: <MyPage />,
       },
       {
-        path: "/lotteries",
-        element: <div>mypage</div>,
+        path: "/treasures/new",
+        element: <TreasuresNew />,
+      },
+      {
+        path: "/treasures",
+        element: <Treasures />,
       },
     ],
   },
