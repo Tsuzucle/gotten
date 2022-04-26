@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createCustomEqual } from "fast-equals";
 import { Wrapper } from "@googlemaps/react-wrapper";
 import { isLatLngLiteral } from "@googlemaps/typescript-guards";
@@ -40,8 +40,12 @@ const App: React.FC<Props> = (props) => {
         overflow: "auto",
       }}
     >
-      {!marker && <h3>Click on map to add markers</h3>}
-      {marker && <pre>{JSON.stringify(marker, null, 2)}</pre>}
+      <pre>
+        {marker.lat > 0 ? "北緯" : "南緯"} : {marker.lat} 度
+      </pre>
+      <pre>
+        {marker.lng > 0 ? "東経" : "西経"} : {marker.lng} 度
+      </pre>
     </div>
   );
 
@@ -158,15 +162,12 @@ const deepCompareEqualsForMaps = createCustomEqual(
       return new google.maps.LatLng(a).equals(new google.maps.LatLng(b));
     }
 
-    // TODO extend to other types
-
-    // use fast-equals for other objects
     return deepEqual(a, b);
   }
 );
 
 function useDeepCompareMemoize(value: any) {
-  const ref = React.useRef();
+  const ref = useRef();
 
   if (!deepCompareEqualsForMaps(value, ref.current)) {
     ref.current = value;

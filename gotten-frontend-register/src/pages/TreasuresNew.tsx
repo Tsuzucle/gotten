@@ -3,7 +3,7 @@ import _ from "lodash";
 import { Button, Input } from "antd";
 import React, { useCallback, useRef, useState } from "react";
 
-import { Column, Row, Map } from "../components";
+import { Column, Row, Map, LoadingBackdrop } from "../components";
 import useLatLng from "../hooks/useLatLng";
 
 type FormValues = {
@@ -52,7 +52,7 @@ const TreasuresNew: React.FC = () => {
               placeholder="キーフレーズ"
             />
           </Row>
-          {latLng && (
+          {latLng ? (
             <Map
               defaultLatLng={latLng}
               onChange={(position) => {
@@ -63,6 +63,10 @@ const TreasuresNew: React.FC = () => {
                 }));
               }}
             />
+          ) : (
+            <LoadingBackdrop loading={true}>
+              <Column className={styles.loadToGeo}>GPSを取得中です。</Column>
+            </LoadingBackdrop>
           )}
         </Column>
         <Button disabled={!canSubmit} onClick={handleSubmit}>
@@ -86,6 +90,9 @@ const styles = {
   fieldContainer: css`
     margin: 8px 0px;
     background-color: red;
+  `,
+  loadToGeo: css`
+    height: 240px;
   `,
 };
 

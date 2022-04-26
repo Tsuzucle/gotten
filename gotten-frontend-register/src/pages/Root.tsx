@@ -38,25 +38,25 @@ function Layout() {
   const loading = useReactiveVar(screenLoadingVar);
 
   return (
-    <BaseLayout style={{ minHeight: "100vh" }}>
-      <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
-        <Menu
-          theme="dark"
-          defaultSelectedKeys={["1"]}
-          mode="inline"
-          items={items}
-        />
-      </Sider>
-      <BaseLayout className="site-layout">
-        <LoadingBackdrop loading={loading}>
+    <LoadingBackdrop loading={false}>
+      <BaseLayout style={{ minHeight: "100vh" }}>
+        <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
+          <Menu
+            theme="dark"
+            defaultSelectedKeys={["1"]}
+            mode="inline"
+            items={items}
+          />
+        </Sider>
+        <BaseLayout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }} />
           <Content className={styles.content}>
             <Outlet />
           </Content>
           <Footer style={{ textAlign: "center" }}>Gotten ©2022</Footer>
-        </LoadingBackdrop>
+        </BaseLayout>
       </BaseLayout>
-    </BaseLayout>
+    </LoadingBackdrop>
   );
 }
 
