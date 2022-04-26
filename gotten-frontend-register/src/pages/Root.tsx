@@ -52,7 +52,7 @@ function Layout() {
         <Content className={styles.content}>
           <Outlet />
         </Content>
-        <Footer style={{ textAlign: "center" }}>Ether Lottery ©2022</Footer>
+        <Footer style={{ textAlign: "center" }}>Gotten ©2022</Footer>
         {/* </LoadingBackdrop> */}
       </BaseLayout>
     </BaseLayout>
