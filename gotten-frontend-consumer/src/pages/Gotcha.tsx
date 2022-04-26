@@ -1,6 +1,6 @@
 import { useReactiveVar } from "@apollo/client";
 import qs from "qs";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { contractVar } from "../contract";
 import Column from "../components/Column";
@@ -17,6 +17,7 @@ const Gotcha = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [exploreUrl, setExploreUrl] = useState("");
 
   const params = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -26,12 +27,15 @@ const Gotcha = () => {
 
   const handleClickGotcha = useCallback(async () => {
     try {
+      setLoading(true);
       const tx = await contract!.gotcha(key);
       navigate(`/gotcha`);
       setExploreUrl(`${exploreBaseUrl}${tx.hash}`);
     } catch (e) {
       console.log({ e });
       setError('"gotcha" しっぱいしました');
+    } finally {
+      setLoading(false);
     }
   }, [contract]);
 
@@ -52,7 +56,13 @@ const Gotcha = () => {
       ) : error ? (
         <Text type="danger">{error}</Text>
       ) : (
-        <Button color="success" onClick={handleClickGotcha}>
+        <Button
+          className={styles.gotchaButton}
+          loading={loading}
+          size="large"
+          color="success"
+          onClick={handleClickGotcha}
+        >
           Gotcha
         </Button>
       )}
@@ -68,6 +78,9 @@ const styles = {
     justify-content: center;
     height: 100%;
     width: 100%;
+  `,
+  gotchaButton: css`
+    width: 80%;
   `,
 };
 export default Gotcha;
