@@ -5,9 +5,8 @@ import { DesktopOutlined, PieChartOutlined } from "@ant-design/icons";
 import React, { Suspense, useState } from "react";
 // import LoadingBackdrop from "./components/LoadingBackdrop";
 import { css } from "@emotion/css";
+import { screenLoadingVar } from "../state/root";
 const { Header, Content, Footer, Sider } = BaseLayout;
-
-export const screenLoadingVar = makeVar(false);
 
 type MenuItemType = Required<MenuProps>["items"][number];
 
