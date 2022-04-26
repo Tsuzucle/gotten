@@ -65,6 +65,7 @@ const Gotcha = () => {
             loading={loading}
             size="large"
             color="success"
+            disabled={!password}
             onClick={handleClickGotcha}
           >
             Gotcha
