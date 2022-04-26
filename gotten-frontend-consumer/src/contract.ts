@@ -18,6 +18,8 @@ export const initContract = async () => {
   contractVar(new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer));
 };
 
+initContract();
+
 export const getChainId = async () => {
   return await window.ethereum.request({ method: "eth_chainId" });
 };
@@ -40,6 +42,18 @@ export const addNetwork = async () => {
     ],
   });
 };
+
+export async function onWalletConnect() {
+  const chainId = await getChainId();
+  if (chainId !== CHAIN_ID) {
+    await changeNetwork().catch(async (error) => {
+      await addNetwork();
+      await changeNetwork();
+    });
+  }
+  await initContract();
+  updateTokenBalance();
+}
 
 async function changeNetwork() {
   await window.ethereum.request({
