@@ -10,7 +10,6 @@ export const location = new ReactLocation();
 
 const routes: Route[] = [
   {
-    path: "/",
     element: <Root />,
     children: [
       {
@@ -24,6 +23,10 @@ const routes: Route[] = [
       {
         path: "/treasures",
         element: <Treasures />,
+      },
+      {
+        path: "/",
+        element: <MyPage />,
       },
     ],
   },
