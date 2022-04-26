@@ -1,15 +1,16 @@
 import { Layout as BaseLayout, Menu, MenuProps } from "antd";
-import { makeVar, useReactiveVar } from "@apollo/client";
+import { useReactiveVar } from "@apollo/client";
 import { Outlet, Link } from "@tanstack/react-location";
 import {
   AimOutlined,
   UserOutlined,
   EnvironmentOutlined,
 } from "@ant-design/icons";
-import React, { Suspense, useState } from "react";
-// import LoadingBackdrop from "./components/LoadingBackdrop";
+import React, { useState } from "react";
+
 import { css } from "@emotion/css";
 import { screenLoadingVar } from "../state/root";
+import { LoadingBackdrop } from "../components";
 const { Header, Content, Footer, Sider } = BaseLayout;
 
 type MenuItemType = Required<MenuProps>["items"][number];
@@ -47,13 +48,13 @@ function Layout() {
         />
       </Sider>
       <BaseLayout className="site-layout">
-        {/* <LoadingBackdrop loading={loading}> */}
-        <Header className="site-layout-background" style={{ padding: 0 }} />
-        <Content className={styles.content}>
-          <Outlet />
-        </Content>
-        <Footer style={{ textAlign: "center" }}>Gotten ©2022</Footer>
-        {/* </LoadingBackdrop> */}
+        <LoadingBackdrop loading={loading}>
+          <Header className="site-layout-background" style={{ padding: 0 }} />
+          <Content className={styles.content}>
+            <Outlet />
+          </Content>
+          <Footer style={{ textAlign: "center" }}>Gotten ©2022</Footer>
+        </LoadingBackdrop>
       </BaseLayout>
     </BaseLayout>
   );

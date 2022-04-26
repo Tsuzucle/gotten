@@ -9,3 +9,6 @@ export { default as Map } from "./Map";
 
 export * from "./KeyValueList";
 export { default as KeyValueList } from "./KeyValueList";
+
+export * from "./LoadingBackdrop";
+export { default as LoadingBackdrop } from "./LoadingBackdrop";

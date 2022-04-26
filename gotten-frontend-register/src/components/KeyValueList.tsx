@@ -1,6 +1,5 @@
 import React from "react";
 import { List } from "antd";
-import { css } from "@emotion/css";
 import Typography from "antd/lib/typography";
 const { Title, Text } = Typography;
 
@@ -31,13 +30,6 @@ const KeyValueList: React.FC<KeyValueListProps> = (props) => {
       )}
     />
   );
-};
-
-const styles = {
-  root: css``,
-  contents: css`
-    width: 50%;
-  `,
 };
 
 export default KeyValueList;
