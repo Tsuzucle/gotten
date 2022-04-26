@@ -17,7 +17,7 @@ const connectWeb3 = async () => {
 // 初期化時も発火
 connectWeb3();
 
-ethereum.on("accountsChanged", async () => {
+ethereum?.on("accountsChanged", async () => {
   connectWeb3();
 });
 
