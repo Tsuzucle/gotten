@@ -1,8 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import logo from "./logo.svg";
+import { useSearchParams } from "react-router-dom";
+import { initContract } from "./contract";
+import "./App.css";
 
 function App() {
+  useEffect(() => {
+    initContract();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">

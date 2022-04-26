@@ -1,5 +1,5 @@
 import { makeVar } from "@apollo/client";
-
+import { ethers } from "ethers";
 const ethereum = window.ethereum;
 if (!ethereum) {
   window.alert("Please install to MetaMask.");

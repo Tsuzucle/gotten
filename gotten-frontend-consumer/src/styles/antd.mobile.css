@@ -1,0 +1,16 @@
+
+ :root:root {
+  --adm-color-primary: #f36c01;
+  --adm-color-success: #284c93;
+  --adm-color-warning: #ff8f1f;
+  --adm-color-danger: #e00029;
+  --adm-color-white: #ffffff;
+  --adm-color-weak: #999999;
+  --adm-color-light: #cccccc;
+  --adm-border-color: #eeeeee;
+  --adm-font-size-main: 13px;
+  --adm-color-text: #333333;
+  --adm-font-family: -apple-system, Roboto, 'Hiragino Kaku Gothic ProN',
+    'Hiragino Sans', YuGothic, 'Yu Gothic Medium', 'Yu Gothic', Meiryo,
+    sans-serif;
+}
