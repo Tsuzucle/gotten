@@ -2,15 +2,16 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createCustomEqual } from "fast-equals";
 import { Wrapper } from "@googlemaps/react-wrapper";
 import { isLatLngLiteral } from "@googlemaps/typescript-guards";
+import { Treasure } from "../types";
 
 type Props = {
-  markers: google.maps.LatLngLiteral[];
+  treasures: Treasure[];
 };
 
 const defaultCenter = { lat: 35.6769883, lng: 139.7588499 };
 
 const App: React.FC<Props> = (props) => {
-  const { markers } = props;
+  const { treasures } = props;
   const [zoom, setZoom] = useState(15);
   const [center, setCenter] =
     useState<google.maps.LatLngLiteral>(defaultCenter);
@@ -21,7 +22,7 @@ const App: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <div style={{ display: "flex", height: "400px" }}>
+    <div style={{ display: "flex", height: "100%", width: "100%" }}>
       <Wrapper apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY!}>
         <Map
           center={center}
@@ -29,8 +30,15 @@ const App: React.FC<Props> = (props) => {
           zoom={zoom}
           style={{ flexGrow: "1", height: "100%" }}
         >
-          {markers.map((marker) => {
-            return <Marker position={marker} />;
+          {treasures.map((treasure) => {
+            return (
+              <Marker
+                position={{
+                  lat: Number(treasure.lat),
+                  lng: Number(treasure.lon),
+                }}
+              />
+            );
           })}
         </Map>
       </Wrapper>

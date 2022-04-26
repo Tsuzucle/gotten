@@ -68,4 +68,16 @@ async function changeNetwork() {
   });
 }
 
+export const loadTreasures = async () => {
+  const contract = contractVar()!;
+  const treasureCount = (await contract.treasureCount()).toNumber();
+  // console.log(treasureCount)
+  const treasures = [];
+  for (let i = 1; i <= treasureCount; i++) {
+    const treasure = await contract.treasures(i);
+    treasures.push({ ...treasure, id: i });
+  }
+  return treasures;
+};
+
 initContract();
