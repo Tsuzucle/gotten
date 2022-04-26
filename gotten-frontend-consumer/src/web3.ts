@@ -5,9 +5,7 @@ const accountVar = makeVar<string | null>(null);
 
 const connectWeb3 = async () => {
   if (typeof ethereum === "undefined") {
-    if (window.confirm("Open in the MetaMask app?")) {
-      return;
-    }
+    return;
   }
 
   const accounts = await ethereum.request({ method: "eth_requestAccounts" });
