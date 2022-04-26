@@ -20,7 +20,9 @@ const Gotcha = () => {
   const [loading, setLoading] = useState(false);
   const [exploreUrl, setExploreUrl] = useState("");
 
-  const params = qs.parse(location.search, { ignoreQueryPrefix: true });
+  const params = qs.parse(location.search, {
+    ignoreQueryPrefix: true,
+  }) as Record<string, string>;
 
   const { r: rand, p: password } = params;
   const key = `${rand}${password}`;
@@ -56,15 +58,18 @@ const Gotcha = () => {
       ) : error ? (
         <Text type="danger">{error}</Text>
       ) : (
-        <Button
-          className={styles.gotchaButton}
-          loading={loading}
-          size="large"
-          color="success"
-          onClick={handleClickGotcha}
-        >
-          Gotcha
-        </Button>
+        <Column>
+          <Text type="secondary">パスワード:{password}</Text>
+          <Button
+            className={styles.gotchaButton}
+            loading={loading}
+            size="large"
+            color="success"
+            onClick={handleClickGotcha}
+          >
+            Gotcha
+          </Button>
+        </Column>
       )}
     </Column>
   );
@@ -80,7 +85,7 @@ const styles = {
     width: 100%;
   `,
   gotchaButton: css`
-    width: 80%;
+    width: 80vw;
   `,
 };
 export default Gotcha;
