@@ -55,12 +55,6 @@ export async function onWalletConnect() {
   await initContract();
 }
 
-export const updateTokenBalance = async () => {
-  const contract = contractVar()!;
-  const account = accountVar()!;
-  return await contract.balanceOf(account);
-};
-
 async function changeNetwork() {
   await window.ethereum.request({
     method: "wallet_switchEthereumChain",
@@ -78,6 +72,13 @@ export const loadTreasures = async () => {
     treasures.push({ ...treasure, id: i });
   }
   return treasures;
+};
+
+export const getBalance = async () => {
+  const contract = contractVar()!;
+  const account = accountVar()!;
+  const balance = await contract.balanceOf(account);
+  return ethers.utils.formatEther(balance);
 };
 
 initContract();
