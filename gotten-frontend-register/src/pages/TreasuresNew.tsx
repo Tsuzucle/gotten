@@ -64,9 +64,13 @@ const TreasuresNew: React.FC = () => {
               }}
             />
           ) : (
-            <LoadingBackdrop loading={true}>
-              <Column className={styles.loadToGeo}>GPSを取得中です。</Column>
-            </LoadingBackdrop>
+            <Column className={styles.loading}>
+              <LoadingBackdrop>
+                <Column className={styles.loadingText}>
+                  GPSを取得中です。
+                </Column>
+              </LoadingBackdrop>
+            </Column>
           )}
         </Column>
         <Button disabled={!canSubmit} onClick={handleSubmit}>
@@ -91,8 +95,12 @@ const styles = {
     margin: 8px 0px;
     background-color: red;
   `,
-  loadToGeo: css`
+  loading: css`
     height: 240px;
+    position: relative;
+  `,
+  loadingText: css`
+    // height: 240px;
   `,
 };
 

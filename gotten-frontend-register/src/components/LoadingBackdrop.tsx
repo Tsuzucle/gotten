@@ -12,25 +12,17 @@ const LoadingBackdrop: React.FC<LoadingBackdropProps> = (props) => {
   return (
     <>
       {children}
-      <Spin
-        size="large"
-        className={clsx(styles.spin, { [styles.notLoading]: !loading })}
-      />
+      {loading && <Spin size="large" className={clsx(styles.spin)} />}
     </>
   );
 };
 
 const styles = {
-  root: css`
-    width: 100%;
-    height: 100%;
-    position: relative;
-  `,
   spin: css`
-    position: absolute;
+    position: absolute !important;
+    display: flex !important;
     width: 100%;
     height: 100%;
-    display: flex;
     align-items: center;
     justify-content: center;
     top: 0;
@@ -38,9 +30,6 @@ const styles = {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.1);
-  `,
-  notLoading: css`
-    display: none;
   `,
 };
 

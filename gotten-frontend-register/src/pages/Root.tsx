@@ -38,7 +38,7 @@ function Layout() {
   const loading = useReactiveVar(screenLoadingVar);
 
   return (
-    <LoadingBackdrop loading={false}>
+    <LoadingBackdrop loading={loading}>
       <BaseLayout style={{ minHeight: "100vh" }}>
         <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
           <Menu
