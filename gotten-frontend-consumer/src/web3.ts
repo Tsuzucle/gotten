@@ -22,4 +22,10 @@ ethereum.on("accountsChanged", async () => {
   connectWeb3();
 });
 
+export function openMetaMaskApp() {
+  const location = window.location;
+  const url = `https://metamask.app.link/dapp/${location.hostname}${location.pathname}${location.search}`;
+  location.href = url;
+}
+
 export { accountVar, connectWeb3 };

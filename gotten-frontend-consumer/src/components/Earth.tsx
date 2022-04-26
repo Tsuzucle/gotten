@@ -4,14 +4,6 @@ import * as GIO from "giojs";
 
 const initCountry = "JP";
 
-const data = [
-  {
-    e: "JP",
-    i: "CN",
-    v: 3000000,
-  },
-];
-
 const Earth = () => {
   const ref = useRef(null);
 
@@ -19,11 +11,23 @@ const Earth = () => {
     const controller = new GIO.Controller(ref.current, {
       control: { initCountry },
     });
-    controller.addData(data);
     controller.init();
   }, []);
 
-  return <div style={{ width: "96vw", height: "96vw" }} ref={ref} />;
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        position: "absolute",
+        right: 0,
+        top: 0,
+        left: 0,
+        bottom: 0,
+      }}
+      ref={ref}
+    />
+  );
 };
 
 export default Earth;

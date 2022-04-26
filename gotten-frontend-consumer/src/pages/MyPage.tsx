@@ -2,6 +2,7 @@ import { useReactiveVar } from "@apollo/client";
 import { css } from "@emotion/css";
 import { Typography } from "antd";
 import { useEffect, useState } from "react";
+import { Earth } from "../components";
 import Column from "../components/Column";
 import { getBalance } from "../contract";
 import { accountVar } from "../web3";
@@ -17,16 +18,22 @@ const Wallet = () => {
     });
   }, []);
   return (
-    <Column className={styles.root}>
-      <Title>{balance} GTN</Title>
-      <Text>Address</Text>
-      <Text copyable>{account}</Text>
-    </Column>
+    <>
+      <Earth />
+      <Column className={styles.root}>
+        <Title style={{ color: "white" }}>{balance} GTN</Title>
+        <Text style={{ color: "white" }}>Address</Text>
+        <Text style={{ color: "white" }} copyable>
+          {account}
+        </Text>
+      </Column>
+    </>
   );
 };
 
 const styles = {
   root: css`
+    position: absolute;
     width: 100%;
     height: 100%;
     align-items: center;

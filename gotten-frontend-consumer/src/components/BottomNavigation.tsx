@@ -34,7 +34,7 @@ const BottomNavigation: FC = () => {
     (value: string) => {
       navigate(value);
     },
-    [location]
+    [navigate]
   );
 
   return (

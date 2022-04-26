@@ -8,11 +8,16 @@ import {
   EXPLORER_URL,
   RPC_URL,
 } from "./constants";
-import { accountVar } from "./web3";
+import { accountVar, openMetaMaskApp } from "./web3";
 
 export const contractVar = makeVar<Contract | null>(null);
 
 export const initContract = async () => {
+  if (!window.ethereum) {
+    openMetaMaskApp();
+
+    return;
+  }
   const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
   await provider.send("eth_requestAccounts", []);
   const signer = provider.getSigner();

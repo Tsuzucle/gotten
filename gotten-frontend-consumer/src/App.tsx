@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import logo from "./logo.svg";
-import { Route, Routes, useSearchParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { initContract } from "./contract";
 import "./App.css";
 import BottomNavigation from "./components/BottomNavigation";
